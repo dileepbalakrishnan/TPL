@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandleExceptions", "HandleE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynchronizationWithSimpleLocking", "SynchronizationWithSimpleLocking\SynchronizationWithSimpleLocking.csproj", "{E19E398B-464E-4170-B2E1-D080BD3E240C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockFreeSynchronization", "LockFreeSynchronization\LockFreeSynchronization.csproj", "{BD8DA9C2-E84D-46B4-9BC0-D4B4AA2A45BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E19E398B-464E-4170-B2E1-D080BD3E240C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E19E398B-464E-4170-B2E1-D080BD3E240C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E19E398B-464E-4170-B2E1-D080BD3E240C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD8DA9C2-E84D-46B4-9BC0-D4B4AA2A45BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD8DA9C2-E84D-46B4-9BC0-D4B4AA2A45BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD8DA9C2-E84D-46B4-9BC0-D4B4AA2A45BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD8DA9C2-E84D-46B4-9BC0-D4B4AA2A45BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

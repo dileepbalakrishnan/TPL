@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynchronizationWithSimpleLo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LockFreeSynchronization", "LockFreeSynchronization\LockFreeSynchronization.csproj", "{BD8DA9C2-E84D-46B4-9BC0-D4B4AA2A45BF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpinLockDemo", "SpinLockDemo\SpinLockDemo.csproj", "{02B49F75-AB2C-4DCD-ACC0-E086F9C1FB3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BD8DA9C2-E84D-46B4-9BC0-D4B4AA2A45BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD8DA9C2-E84D-46B4-9BC0-D4B4AA2A45BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD8DA9C2-E84D-46B4-9BC0-D4B4AA2A45BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02B49F75-AB2C-4DCD-ACC0-E086F9C1FB3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02B49F75-AB2C-4DCD-ACC0-E086F9C1FB3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02B49F75-AB2C-4DCD-ACC0-E086F9C1FB3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02B49F75-AB2C-4DCD-ACC0-E086F9C1FB3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

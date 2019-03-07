@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
@@ -15,11 +16,11 @@ namespace ParallelMatrixMultiplication
         private static void Main(string[] args)
         {
             for (var i = 0; i < MatrixSize; i++)
-            for (var j = 0; j < MatrixSize; j++)
-            {
-                M1[i, j] = i + 1;
-                M2[i, j] = i + 1;
-            }
+                for (var j = 0; j < MatrixSize; j++)
+                {
+                    M1[i, j] = i + 1;
+                    M2[i, j] = i + 1;
+                }
             var benchmarkResults = BenchmarkRunner.Run<Program>();
             Console.WriteLine(benchmarkResults);
             Console.ReadLine();
@@ -29,12 +30,12 @@ namespace ParallelMatrixMultiplication
         public void MultiplyMatrices()
         {
             for (var i = 0; i < MatrixSize; i++)
-            for (var j = 0; j < MatrixSize; j++)
-            {
-                Result[i, j] = 0;
-                for (var k = 0; k < MatrixSize; k++)
-                    Result[i, j] += M1[i, k] * M2[k, j];
-            }
+                for (var j = 0; j < MatrixSize; j++)
+                {
+                    Result[i, j] = 0;
+                    for (var k = 0; k < MatrixSize; k++)
+                        Result[i, j] += M1[i, k] * M2[k, j];
+                }
         }
 
         [Benchmark(Description = "Parallel Run")]
@@ -49,6 +50,36 @@ namespace ParallelMatrixMultiplication
                         Result[i, j] += M1[i, k] * M2[k, j];
                 }
             });
+        }
+        /// <summary>
+        /// This sample is adopted from Microsoft Reserach and slightly modified to fit this demo
+        /// </summary>
+        [Benchmark(Description = "Parallel Run using explicit threads")]
+        public void ThreadMatrixMul()
+        {
+            var matrixSize = MatrixSize;
+            var processorCount = 2 * Environment.ProcessorCount;
+            var partitionSize = matrixSize / processorCount;
+            var waitHandle = new AutoResetEvent(false);
+            var counter = processorCount;
+            for (var c = 0; c < processorCount; c++)
+                ThreadPool.QueueUserWorkItem(
+                    delegate(object o)
+                    {
+                        var lc = (int) o;
+                        for (var i = lc * partitionSize;
+                            i < (lc + 1 == processorCount ? matrixSize : (lc + 1) * partitionSize);
+                            i++)
+                        for (var j = 0; j < MatrixSize; j++)
+                        {
+                            Result[i, j] = 0;
+                            for (var k = 0; k < MatrixSize; k++)
+                                Result[i, j] += M1[i, k] * M2[k, j];
+                        }
+                        if (Interlocked.Decrement(ref counter) == 0)
+                            waitHandle.Set();
+                    }, c);
+            waitHandle.WaitOne();
         }
     }
 }

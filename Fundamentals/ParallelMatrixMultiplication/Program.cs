@@ -81,5 +81,24 @@ namespace ParallelMatrixMultiplication
                     }, c);
             waitHandle.WaitOne();
         }
+
+        [Benchmark(Description = "Parallel Run With Multiple Index")]
+        public void ParallelMultiplyMatricesUsingTwoIndices()
+        {
+            For2(MatrixSize, MatrixSize, delegate (int i, int j) {
+                Result[i, j] = 0;
+                for (var k = 0; k < MatrixSize; k++)
+                {
+                    Result[i, j] += M1[i, k] * M2[k, j];
+                }
+            });
+        }
+
+        public void For2(int size1, int size2, Action<int, int> body)
+        {
+            Parallel.For(0, size1 * size2, delegate (int i) {
+                body(i / size2, i % size2);
+            });
+        }
     }
 }
